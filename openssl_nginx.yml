@@ -1,0 +1,16 @@
+version: "3"
+services:
+    openssl_nginx:
+        container_name: openssl_nginx
+        image: nginx:latest
+        restart: unless-stopped
+        ports:
+            - 80:80
+            - 443:443
+        volumes:
+            - ./nginx/conf:/etc/nginx/conf.d
+            - ./nginx/snippets:/etc/nginx/snippets
+            - ./nginx/parameters:/etc/nginx/parameters
+            - ./ssl/certs:/etc/ssl/certs
+            - ./ssl/private:/etc/ssl/private
+        network_mode: host
