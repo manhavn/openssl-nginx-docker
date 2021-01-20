@@ -5,6 +5,10 @@ Download file openssl_nginx_docker.tar.gz: https://1drv.ms/u/s!AmTBBadWxl4O0UHXC
 
 Run CMD
 ```bash
+ # Install DOCKER
+ sudo apt install docker-compose
+
+ cd ~/Downloads/
  tar zxf openssl_nginx_docker.tar.gz
  # or
  git clone https://github.com/manhavn/openssl-nginx-docker.git
@@ -27,7 +31,10 @@ CTRL + S ( Save )
 CTRL + X ( Exit )
 
 ```bash
- sh ~/path-to-folder/openssl-nginx-docker/start.sh
+ sh ~/Downloads/openssl-nginx-docker/start.sh
+ xdg-open https://shop.db && python3.8 -m http.server 3000
 
+ # or
+ cd ~/Downloads/openssl-nginx-docker/
  docker-compose -f openssl_nginx.yml up -d && xdg-open https://shop.db && python3.8 -m http.server 3000
 ```
