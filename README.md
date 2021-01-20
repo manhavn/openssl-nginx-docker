@@ -9,7 +9,7 @@ Run CMD
  # or
  git clone https://github.com/manhavn/openssl-nginx-docker.git
 
- cd openssl_nginx_docker
+ cd openssl-nginx-docker
  sh setup.sh
 
  sudo nano /etc/hosts
@@ -27,5 +27,5 @@ CTRL + S ( Save )
 CTRL + X ( Exit )
 
 ```bash
- xdg-open https://shop.db && python3.8 -m http.server 3000
+ docker-compose -f openssl_nginx.yml up -d && xdg-open https://shop.db && python3.8 -m http.server 3000
 ```
