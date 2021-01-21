@@ -38,3 +38,8 @@ CTRL + X ( Exit )
  cd ~/Downloads/openssl-nginx-docker/
  docker-compose -f openssl_nginx.yml up -d && xdg-open https://shop.db && python3.8 -m http.server 3000
 ```
+
+Stop Service
+```bash
+ sh ~/Downloads/openssl-nginx-docker/stop.sh
+```
