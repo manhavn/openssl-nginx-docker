@@ -16,7 +16,7 @@ Run CMD
  cd openssl-nginx-docker
  sh setup.sh
 
- sudo nano /etc/hosts
+ sudo nano /etc/hosts #or run: sh add_to_env_hosts.sh
 ```
 
 Add config to /etc/hosts
