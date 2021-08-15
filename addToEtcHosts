@@ -1,0 +1,31 @@
+#!/bin/bash
+echo 'cd '"$(dirname "$0")"
+cd "$(dirname "$0")"
+
+if [[ $(grep "golang" /etc/hosts) == "127.0.0.1 golang" ]]; then
+  echo "--------------------------------------------------------------"
+  echo "Exists 127.0.0.1 golang ==> /etc/hosts"
+else
+  echo '127.0.0.1 golang' | sudo tee -a /etc/hosts
+fi
+
+if [[ $(grep "shop.sdk" /etc/hosts) == "127.0.0.1 shop.sdk" ]]; then
+  echo "--------------------------------------------------------------"
+  echo "Exists 127.0.0.1 shop.sdk ==> /etc/hosts"
+else
+  echo '127.0.0.1 shop.sdk' | sudo tee -a /etc/hosts
+fi
+
+if [[ $(grep "shop.db" /etc/hosts) == "127.0.0.1 shop.db" ]]; then
+  echo "--------------------------------------------------------------"
+  echo "Exists 127.0.0.1 shop.db ==> /etc/hosts"
+else
+  echo '127.0.0.1 shop.db' | sudo tee -a /etc/hosts
+fi
+
+echo ""
+echo "---------| cat /etc/hosts |---------"
+echo "--------------------------------------------------------------"
+cat /etc/hosts
+echo "--------------------------------------------------------------"
+echo "Done!"
