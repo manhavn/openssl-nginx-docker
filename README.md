@@ -14,7 +14,7 @@ Download file openssl_nginx_docker.tar.gz: https://1drv.ms/u/s!AmTBBadWxl4O0UHXC
  export PARENT_HOSTNAME=$(netsh interface ip show address "Wi-Fi" | grep 'IP Address' | sed -r 's/^.*IP Address:\W*//')
 
  # MacOS
- export PARENT_HOSTNAME=$(ifconfig | grep "inet " | grep -Fv 127.0.0.1 | awk '{print $2}')
+ export PARENT_HOSTNAME=$(echo $(ifconfig | grep "inet " | grep -Fv 127.0.0.1 | awk '{print $2}') | awk '{print $1}')
 
  # Ubuntu
  export PARENT_HOSTNAME=$(hostname -I | cut -d ' ' -f 1)
@@ -77,7 +77,7 @@ CTRL + X ( Exit )
  # or
  cd ~/Downloads/openssl-nginx-docker/
  # export PARENT_HOSTNAME=$(netsh interface ip show address "Wi-Fi" | grep 'IP Address' | sed -r 's/^.*IP Address:\W*//') # Windows (Wi-Fi)
- # export PARENT_HOSTNAME=$(ifconfig | grep "inet " | grep -Fv 127.0.0.1 | awk '{print $2}') # MacOS
+ # export PARENT_HOSTNAME=$(echo $(ifconfig | grep "inet " | grep -Fv 127.0.0.1 | awk '{print $2}') | awk '{print $1}') # MacOS
  export PARENT_HOSTNAME=$(hostname -I | cut -d ' ' -f 1) # Ubuntu
  docker-compose -f openssl_nginx.yml up -d && xdg-open https://shop.db && python3 -m http.server 3000
  # Windows OS (Wi-Fi): https://shop.db:444
@@ -95,7 +95,7 @@ Stop Service
  # or
  cd ~/Downloads/openssl-nginx-docker/
  # export PARENT_HOSTNAME=$(netsh interface ip show address "Wi-Fi" | grep 'IP Address' | sed -r 's/^.*IP Address:\W*//') # Windows (Wi-Fi)
- # export PARENT_HOSTNAME=$(ifconfig | grep "inet " | grep -Fv 127.0.0.1 | awk '{print $2}') # MacOS
+ # export PARENT_HOSTNAME=$(echo $(ifconfig | grep "inet " | grep -Fv 127.0.0.1 | awk '{print $2}') | awk '{print $1}') # MacOS
  export PARENT_HOSTNAME=$(hostname -I | cut -d ' ' -f 1) # Ubuntu
  docker-compose -f openssl_nginx.yml down
 ```
