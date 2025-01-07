@@ -1,101 +1,79 @@
 # openssl-nginx-docker
 
-Download file openssl_nginx_docker.tar.gz: https://1drv.ms/u/s!AmTBBadWxl4O0UHXCUcYpF1R3nZr?e=QT1z8d
-( OR clone code: https://github.com/manhavn/openssl-nginx-docker.git )
-
-### MacOS | Ubuntu | Windows
-
-- Config (PARENT_HOSTNAME):
-    + start.sh
-    + stop.sh
-
-```bash
- # Windows (Wi-Fi)
- export PARENT_HOSTNAME=$(netsh interface ip show address "Wi-Fi" | grep 'IP Address' | sed -r 's/^.*IP Address:\W*//')
-
- # MacOS
- export PARENT_HOSTNAME=$(echo $(ifconfig | grep "inet " | grep -Fv 127.0.0.1 | awk '{print $2}') | awk '{print $1}')
-
- # Ubuntu
- export PARENT_HOSTNAME=$(hostname -I | cut -d ' ' -f 1)
+## CLONE CODE
+```shell
+git clone https://github.com/manhavn/openssl-nginx-docker.git openssl-nginx-docker
 ```
 
-### Run CMD
+- MACOS
 
-- Setup (terminal | bash):
-    + sh setup.sh
-    + chmod +x addToEtcHosts && ./addToEtcHosts
-    + Open: https://shop.db
+```shell
+sudo nano /private/etc/hosts
 
-- Windows OS open in Git Bash ( Download & Install: https://git-scm.com/download/win )
-    + sh setup.sh
-    + Notepad (Run as administrator) edit file: C:\Windows\System32\Drivers\etc\hosts
-    + Windows OS (Wi-Fi): https://shop.db:444
-
-```bash
- cd ~/Downloads/
- tar zxf openssl_nginx_docker.tar.gz
- # or
- git clone https://github.com/manhavn/openssl-nginx-docker.git
-
- cd openssl-nginx-docker
- sh setup.sh
-
- sudo nano /etc/hosts
- #or
- chmod +x addToEtcHosts && ./addToEtcHosts
-
- # Ubuntu Install DOCKER
- sudo apt install docker-compose
- sudo groupadd docker
- sudo usermod -aG docker $USER
- sudo reboot
+# 127.0.0.1 test.com
 ```
 
-Add config (if not exists): /etc/hosts
+- UBUNTU
 
-```
-127.0.0.1 golang
-127.0.0.1 shop.sdk
-127.0.0.1 shop.db
-```
+```shell
+sudo nano /etc/hosts
 
-CTRL + S ( Save )
-CTRL + X ( Exit )
-
-```bash
- cd ~/Downloads/openssl-nginx-docker/
- sh start.sh
- xdg-open https://shop.db && python3 -m http.server 3000
- # Windows OS (Wi-Fi): https://shop.db:444
-
- # or
- sh ~/Downloads/openssl-nginx-docker/start.sh
- xdg-open https://shop.db && python3 -m http.server 3000
- # Windows OS (Wi-Fi): https://shop.db:444
-
- # or
- cd ~/Downloads/openssl-nginx-docker/
- # export PARENT_HOSTNAME=$(netsh interface ip show address "Wi-Fi" | grep 'IP Address' | sed -r 's/^.*IP Address:\W*//') # Windows (Wi-Fi)
- # export PARENT_HOSTNAME=$(echo $(ifconfig | grep "inet " | grep -Fv 127.0.0.1 | awk '{print $2}') | awk '{print $1}') # MacOS
- export PARENT_HOSTNAME=$(hostname -I | cut -d ' ' -f 1) # Ubuntu
- docker-compose -f openssl_nginx.yml up -d && xdg-open https://shop.db && python3 -m http.server 3000
- # Windows OS (Wi-Fi): https://shop.db:444
+# 127.0.0.1 test.com
 ```
 
-Stop Service
+## CREATE OPENSSL MKCERT
+```shell
+cd .../openssl-nginx-docker/nginx/mkcert
 
-```bash
- cd ~/Downloads/openssl-nginx-docker/
- sh stop.sh
+# MACOS
+sudo mkcert-v1.4.4-darwin-amd64 -install
+sudo mkcert-v1.4.4-darwin-arm64 -install
 
- # or
- sh ~/Downloads/openssl-nginx-docker/stop.sh
+sudo mkcert-v1.4.4-darwin-amd64 test.com
+sudo mkcert-v1.4.4-darwin-arm64 test.com
 
- # or
- cd ~/Downloads/openssl-nginx-docker/
- # export PARENT_HOSTNAME=$(netsh interface ip show address "Wi-Fi" | grep 'IP Address' | sed -r 's/^.*IP Address:\W*//') # Windows (Wi-Fi)
- # export PARENT_HOSTNAME=$(echo $(ifconfig | grep "inet " | grep -Fv 127.0.0.1 | awk '{print $2}') | awk '{print $1}') # MacOS
- export PARENT_HOSTNAME=$(hostname -I | cut -d ' ' -f 1) # Ubuntu
- docker-compose -f openssl_nginx.yml down
+sudo chown $USER test.com.pem
+sudo chown $USER test.com-key.pem
+
+# LINUX
+sudo mkcert-v1.4.4-linux-amd64 -install
+sudo mkcert-v1.4.4-linux-arm -install
+sudo mkcert-v1.4.4-linux-arm64 -install
+
+sudo mkcert-v1.4.4-linux-amd64 test.com
+sudo mkcert-v1.4.4-linux-arm test.com
+sudo mkcert-v1.4.4-linux-arm64 test.com
+
+sudo chown $USER test.com.pem
+sudo chown $USER test.com-key.pem
+
+# WINDOW
+mkcert-v1.4.4-windows-amd64.exe -install
+mkcert-v1.4.4-windows-arm64.exe -install
+
+mkcert-v1.4.4-windows-amd64.exe test.com
+mkcert-v1.4.4-windows-arm64.exe test.com
+```
+
+## RUN NGINX OPENSSL
+
+```shell
+cd .../openssl-nginx-docker
+
+# MACOS
+export PARENT_HOSTNAME=$(echo $(ifconfig | grep "inet " | grep -Fv 127.0.0.1 | awk '{print $2}') | awk '{print $1}')
+docker-compose -f openssl_nginx.yml up -d
+
+# WINDOW
+export PARENT_HOSTNAME=$(netsh interface ip show address "Wi-Fi" | grep 'IP Address' | sed -r 's/^.*IP Address:\W*//')
+docker-compose -f openssl_nginx.yml up -d
+
+# UBUNTU
+export PARENT_HOSTNAME=$(hostname -I | cut -d ' ' -f 1)
+docker-compose -f openssl_nginx.yml up -d
+```
+
+- open browser: https://test.com
+```shell
+open https://test.com
 ```
