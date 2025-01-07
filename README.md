@@ -24,35 +24,36 @@ sudo nano /etc/hosts
 ## CREATE OPENSSL MKCERT
 ```shell
 cd .../openssl-nginx-docker/nginx/mkcert
+sudo chmod +x mkcert-*
 
 # MACOS
-sudo mkcert-v1.4.4-darwin-amd64 -install
-sudo mkcert-v1.4.4-darwin-arm64 -install
+sudo ./mkcert-v1.4.4-darwin-amd64 -install
+sudo ./mkcert-v1.4.4-darwin-arm64 -install
 
-sudo mkcert-v1.4.4-darwin-amd64 test.com
-sudo mkcert-v1.4.4-darwin-arm64 test.com
+sudo ./mkcert-v1.4.4-darwin-amd64 test.com
+sudo ./mkcert-v1.4.4-darwin-arm64 test.com
 
 sudo chown $USER test.com.pem
 sudo chown $USER test.com-key.pem
 
 # LINUX
-sudo mkcert-v1.4.4-linux-amd64 -install
-sudo mkcert-v1.4.4-linux-arm -install
-sudo mkcert-v1.4.4-linux-arm64 -install
+sudo ./mkcert-v1.4.4-linux-amd64 -install
+sudo ./mkcert-v1.4.4-linux-arm -install
+sudo ./mkcert-v1.4.4-linux-arm64 -install
 
-sudo mkcert-v1.4.4-linux-amd64 test.com
-sudo mkcert-v1.4.4-linux-arm test.com
-sudo mkcert-v1.4.4-linux-arm64 test.com
+sudo ./mkcert-v1.4.4-linux-amd64 test.com
+sudo ./mkcert-v1.4.4-linux-arm test.com
+sudo ./mkcert-v1.4.4-linux-arm64 test.com
 
 sudo chown $USER test.com.pem
 sudo chown $USER test.com-key.pem
 
 # WINDOW
-mkcert-v1.4.4-windows-amd64.exe -install
-mkcert-v1.4.4-windows-arm64.exe -install
+.\mkcert-v1.4.4-windows-amd64.exe -install
+.\mkcert-v1.4.4-windows-arm64.exe -install
 
-mkcert-v1.4.4-windows-amd64.exe test.com
-mkcert-v1.4.4-windows-arm64.exe test.com
+.\mkcert-v1.4.4-windows-amd64.exe test.com
+.\mkcert-v1.4.4-windows-arm64.exe test.com
 ```
 
 ## RUN NGINX OPENSSL
