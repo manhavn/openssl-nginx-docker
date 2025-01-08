@@ -21,6 +21,12 @@ sudo nano /etc/hosts
 # 127.0.0.1 test.com
 ```
 
+- WINDOW: "Editor APP" > NotePad (Run Administrator): C:\Windows\System32\drivers\etc\hosts
+
+```shell
+# 127.0.0.1 test.com
+```
+
 ## CREATE OPENSSL MKCERT
 ```shell
 cd .../openssl-nginx-docker/nginx/mkcert
