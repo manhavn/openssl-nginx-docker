@@ -68,7 +68,8 @@ sudo chown $USER test.com-key.pem
 cd .../openssl-nginx-docker
 
 # MACOS
-export PARENT_HOSTNAME=$(echo $(ifconfig | grep "inet " | grep -Fv 127.0.0.1 | awk '{print $2}') | awk '{print $1}')
+# export PARENT_HOSTNAME=$(echo $(ifconfig | grep "inet " | grep -Fv 127.0.0.1 | awk '{print $2}') | awk '{print $1}')
+export PARENT_HOSTNAME=host.docker.internal
 docker-compose -f openssl_nginx.yml up -d
 
 # WINDOW
